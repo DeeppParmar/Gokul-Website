@@ -34,15 +34,27 @@
     </header>
 
     <!-- CTA Section (Moved to top where Hero was) -->
-    <section class="cta" id="cta">
-        <div class="container">
-            <div class="cta-content" data-aos="fade-up">
+   <!-- Updated CTA Section -->
+<section class="cta" id="cta">
+    <div class="container">
+        <div class="cta-content" data-aos="fade-up">
+            <div class="cta-card">
                 <h2>Transform Your Space Today</h2>
                 <p class="lead">Join thousands of satisfied customers who have made Gokul furniture the centerpiece of their homes.</p>
-                <a href="#contact" class="btn btn-accent">Contact us !</a>
+                <a href="#contact" class="btn btn-accent">Contact us</a>
+                
+                <!-- Decorative elements -->
+                <div class="cta-accent"></div>
+                <div class="cta-decoration">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
         <!-- Hero Section (Moved to where CTA was) -->
     <section class="hero" id="hero">
@@ -371,63 +383,41 @@
     <!-- JavaScript Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Initialize AOS (Animate on Scroll)
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init();
-            
-            // Mobile Navigation Toggle
-            const mobileToggle = document.getElementById('mobileToggle');
-            const navLinks = document.getElementById('navLinks');
-            
-            mobileToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-            });
-            
-            // Back to Top Button
-            const backToTopButton = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.add('visible');
-                } else {
-                    backToTopButton.classList.remove('visible');
-                }
-            });
-            
-            backToTopButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // Header Scroll Effect
-            const header = document.getElementById('header');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(e) {
-                if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && e.target !== mobileToggle) {
-                    navLinks.classList.remove('active');
-                }
-            });
-            
-            // Close mobile menu when clicking a link
-            const links = navLinks.querySelectorAll('a');
-            links.forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.classList.remove('active');
-                });
+    // Mobile Navigation Toggle - Updated Code
+    document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default behavior
+            e.stopPropagation(); // Stop event propagation
+            navLinks.classList.toggle('active');
+            console.log('Toggle clicked, nav active:', navLinks.classList.contains('active')); // Debug line
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (navLinks.classList.contains('active') && 
+                !navLinks.contains(e.target) && 
+                e.target !== mobileToggle &&
+                !mobileToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        const links = navLinks.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
             });
         });
+    } else {
+        console.error('Navigation elements not found');
+    }
+});
     </script>
 </body>
 </html>
